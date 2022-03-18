@@ -52,7 +52,7 @@ function HomePage() {
     if (filteredMovies === null) return null;
 
     return filteredMovies.results.map((movie: MovieProps) => (
-      <Grid item xs={2}>
+      <Grid item xs={12} sm={6} md={4} lg={3} xl={2}>
         <Movie key={movie.id} id={movie.id} />
       </Grid>
     ));
@@ -61,6 +61,7 @@ function HomePage() {
   const nextButton = () => {
     return (
       <button
+        className="button-9"
         onClick={() => {
           setPage(page + 1);
         }}
@@ -73,6 +74,7 @@ function HomePage() {
   const previousButton = () => {
     return (
       <button
+        className="button-9"
         onClick={() => {
           setPage(page - 1 > 0 ? page - 1 : page);
         }}
@@ -84,24 +86,27 @@ function HomePage() {
 
   return (
     <div className="App">
-      <Search>
-        <SearchIconWrapper>
-          <SearchIcon />
-        </SearchIconWrapper>
-        <StyledInputBase
-          placeholder="Search…"
-          inputProps={{ "aria-label": "search" }}
-          value={searchKeyword}
-          onChange={(e) => {
-            setSearchKeyword(e.target.value);
-          }}
-        />
-      </Search>
+      <div className="searchBarContainer">
+        {previousButton()}
+        <Search className="searchBar">
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            sx={{ width: "100%" }}
+            placeholder="Search…"
+            inputProps={{ "aria-label": "search" }}
+            value={searchKeyword}
+            onChange={(e) => {
+              setSearchKeyword(e.target.value);
+            }}
+          />
+        </Search>
+        {nextButton()}
+      </div>
       <Grid sx={{ marginTop: "5px" }} container spacing={1}>
         {renderPopularMovies()}
       </Grid>
-      {previousButton()}
-      {nextButton()}
     </div>
   );
 }

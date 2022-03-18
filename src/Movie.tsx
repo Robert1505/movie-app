@@ -43,14 +43,14 @@ export default function Movie(props: Props) {
   const renderMovie = () => {
     if (movie === null) return;
     return (
-      <Card sx={{ maxWidth: 345, height: 450 }}>
+      <Card sx={{ maxWidth: 345, height: 500 }} className = "movieCard">
         <CardMedia
           component="img"
-          height="300px"
+          height="350px"
           width="200px"
           image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
           onClick = {() => {navigate(`/movie/${movie.id}`)}}
-          sx = {{cursor: "pointer"}}
+          sx = {{cursor: "pointer", objectFit: "cover"}}
         />
         <CardContent>
           <Typography gutterBottom variant="h6" component="div">
@@ -58,7 +58,6 @@ export default function Movie(props: Props) {
           </Typography>
           <Typography variant="body2" color="text.secondary">
             Rating: {movie.vote_average} <br />
-            Release Date: {movie.release_date}
           </Typography>
         </CardContent>
       </Card>
