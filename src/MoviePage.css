@@ -1,0 +1,24 @@
+.rootContainer {
+    padding-top: 40px;
+    padding-left: 250px; 
+}
+
+.content {
+    display: flex;
+}
+
+.primaryContainer {
+    flex: 2;
+}
+
+.secondaryContainer {
+    flex: 1;
+}
+
+.chip{
+    border: 1px solid #ffd60a;
+    border-radius: 5px;
+    display: inline;
+    padding: 5px;
+    margin-right: 10px;
+}

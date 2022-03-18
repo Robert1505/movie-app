@@ -1,11 +1,23 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+export type Genre = {
+  id: number;
+  name: string;
+}
 
 export type MovieProps = {
   id: number;
   title: string;
   vote_average: number;
   release_date: string;
+  poster_path: string;
+  backdrop_path: string;
+  overview: string;
+  genres: Genre[];
+  runtime: number;
 };
 
 type Props = {
@@ -14,6 +26,8 @@ type Props = {
 
 export default function Movie(props: Props) {
   const [movie, setMovie] = useState<MovieProps | null>(null);
+
+  let navigate = useNavigate();
 
   useEffect(() => {
     axios
@@ -29,14 +43,25 @@ export default function Movie(props: Props) {
   const renderMovie = () => {
     if (movie === null) return;
     return (
-      <div>
-        <div>
-          {movie.title} | Rating: {movie.vote_average} | Release Date:{" "}
-          {movie.release_date}
-        </div>
-
-        <hr />
-      </div>
+      <Card sx={{ maxWidth: 345, height: 450 }}>
+        <CardMedia
+          component="img"
+          height="300px"
+          width="200px"
+          image={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+          onClick = {() => {navigate(`/movie/${movie.id}`)}}
+          sx = {{cursor: "pointer"}}
+        />
+        <CardContent>
+          <Typography gutterBottom variant="h6" component="div">
+            {movie.title}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Rating: {movie.vote_average} <br />
+            Release Date: {movie.release_date}
+          </Typography>
+        </CardContent>
+      </Card>
     );
   };
 
